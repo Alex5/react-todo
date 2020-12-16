@@ -6,7 +6,7 @@ function App() {
       <div className='todo'>
         <div className="todo__sidebar">
           <ul>
-            <li>1</li>
+            <li></li>
             <li>2</li>
             <li>3</li>
             <li>4</li>
