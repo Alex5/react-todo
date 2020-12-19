@@ -7,7 +7,6 @@ const App = () => {
     return (
         <div className="App">
             <div className='todo'>
-
                 <div className="todo__sidebar">
                     <List items={[
                         {
@@ -19,32 +18,13 @@ const App = () => {
                                         fill="#7C7C7C"/>
                                 </svg>
                             ),
-                            name: 'Все задачи',
+                            name: 'Все задачи'
                         }
                     ]}/>
-                    <List items={[
-                        {
-                            color: 'green',
-                            name: 'Покупки',
-                        },
-                        {
-                            color: 'blue',
-                            name: 'Фронтенд'
-                        },
-                        {
-                            color: 'pink',
-                            name: 'Фильмы и сериалы'
-                        },
-                        {
-                            color: 'lightgreen',
-                            name: 'Книги',
-                            active: true
-                        },
-                        {
-                            color: 'lightgrey',
-                            name: 'Личное'
-                        },
-                    ]}/>
+                    <List items={DB.lists.map(item => {
+                        item.color = DB.colors.filter(color => color.id === item.colorId)[0].name;
+                        return item;
+                    })}/>
                     <AddListButton colors={DB.colors}/>
                 </div>
                 <div className="todo__tasks">TASKS</div>

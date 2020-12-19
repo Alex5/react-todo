@@ -27,11 +27,19 @@
       border-radius: 4px;
     }
 
+    &:hover {
+      background: rgba(255, 255, 255, 0.45);
+      border-radius: 4px;
+    }
+
     .badge {
       border-radius: 30px;
       height: 10px;
       width: 10px;
 
+      &--grey {
+        background-color: #C9D1D3;
+      }
       &--green {
         background-color: #42B883;
       }
@@ -44,12 +52,15 @@
         background-color: #FFBBCC;
       }
 
-      &--lightgreen {
+      &--lime {
         background-color: #B6E6BD;
       }
 
-      &--lightgrey {
-        background-color: #C9D1D3;
+      &--purple {
+        background-color: #C355F5;
+      }
+      &--black {
+        background-color: #110133;
       }
     }
 
