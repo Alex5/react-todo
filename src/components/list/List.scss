@@ -1,0 +1,68 @@
+.list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 57px;
+
+  &__add-button {
+
+    opacity: 0.5;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  li {
+    display: flex;
+    align-items: center;
+    height: 37px;
+    padding-left: 12px;
+    width: 160px;
+    cursor: pointer;
+
+    &.active {
+      background: #FFFFFF;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      border-radius: 4px;
+    }
+
+    .badge {
+      border-radius: 30px;
+      height: 10px;
+      width: 10px;
+
+      &--green {
+        background-color: #42B883;
+      }
+
+      &--blue {
+        background-color: #64C4ED;
+      }
+
+      &--pink {
+        background-color: #FFBBCC;
+      }
+
+      &--lightgreen {
+        background-color: #B6E6BD;
+      }
+
+      &--lightgrey {
+        background-color: #C9D1D3;
+      }
+    }
+
+
+    i {
+      display: inline-flex;
+      margin-right: 5px;
+
+      svg {
+        path {
+          fill: #7C7C7C;
+        }
+      }
+    }
+  }
+}

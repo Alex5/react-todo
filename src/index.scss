@@ -1,28 +1,70 @@
-body {
+* {
+  list-style: none;
+  padding: 0;
   margin: 0;
+  font-size: 14px;
+}
+
+body {
   font-family: 'Roboto', -apple-system, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  list-style-type: none;
 }
 
 .App {
   display: flex;
-  align-items: center;
   justify-content: center;
   height: 100vh;
 }
 
 .todo {
-  width: 750px;
-  height: 530px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  width: 900px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 
   &__sidebar {
     width: 200px;
     height: 100%;
     background-color: #F4F6F8;
+    border-right: 1px solid #F1F1F1;
   }
 }
+
+.button {
+
+  height: 37px;
+  background: #4DD599;
+  border-radius: 4px;
+  border: 0;
+  color: #FFFFFF;
+  cursor: pointer;
+
+  &:hover {
+    background: darken(#4DD599, 5%);
+  }
+  &:active {
+    background: darken(#4DD599, 10%); ;
+  }
+}
+
+.field {
+  width: 100%;
+  height: 32px;
+  border: 1px solid #EFEFEF;
+  border-radius: 4px;
+  font-size: 14px;
+  line-height: 17px;
+
+  &.focus {
+    border-color: whitesmoke;
+  }
+}
+
+input::placeholder {
+  color: #C7C7C7;
+}
+
+
 
 
 

@@ -1,0 +1,23 @@
+.colors-selector {
+  display: flex;
+
+  :not(:last-child) {
+    margin-right: 5px;
+    margin-bottom: 0;
+
+  }
+
+  i {
+    height: 18px;
+    width: 18px;
+    border-radius: 30px;
+    border: 2px solid transparent;
+
+    &.active {
+      border: 2px solid #525252;
+
+    }
+  }
+
+
+}
