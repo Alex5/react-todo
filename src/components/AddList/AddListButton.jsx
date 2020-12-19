@@ -6,7 +6,7 @@ import Badge from "../Badge/Badge";
 
 const AddListButton = ({colors}) => {
 
-    const [visiblePopup, setVisiblePopup] = useState(true)
+    const [visiblePopup, setVisiblePopup] = useState(false)
 
     const onAddListClick = () => {
         setVisiblePopup(true)
