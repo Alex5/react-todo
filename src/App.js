@@ -1,9 +1,23 @@
-import React from 'react';
+import React, {useState} from 'react';
 import List from "./components/list/List";
 import AddListButton from "./components/AddList/AddListButton";
 import DB from './assets/db.json'
 
 const App = () => {
+
+    const [lists, setLists] = useState(
+        DB.lists.map(item => {
+            item.color = DB.colors.filter(color => color.id === item.colorId)[0].name;
+            return item;
+        })
+    )
+
+    const onAddList = (obj) => {
+        const newList = [...lists, obj]
+        setLists(newList)
+        console.log(newList)
+    }
+
     return (
         <div className="App">
             <div className='todo'>
@@ -21,11 +35,8 @@ const App = () => {
                             name: 'Все задачи'
                         }
                     ]}/>
-                    <List items={DB.lists.map(item => {
-                        item.color = DB.colors.filter(color => color.id === item.colorId)[0].name;
-                        return item;
-                    })}/>
-                    <AddListButton colors={DB.colors}/>
+                    <List items={lists}/>
+                    <AddListButton onAddList={onAddList} colors={DB.colors}/>
                 </div>
                 <div className="todo__tasks">TASKS</div>
             </div>

@@ -1,10 +1,7 @@
-import React, {useState} from 'react'
+import React from 'react'
 import './Badge.scss'
 
-const Badge = ({colors}) => {
-
-    const [selectedColor, selectColor] = useState(colors[0].id)
-    console.log(selectedColor)
+const Badge = ({colors, selectColor, selectedColor}) => {
 
     return (
         <div className="colors-selector" >
