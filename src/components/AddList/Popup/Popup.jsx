@@ -24,6 +24,7 @@ const Popup = ({colors, onCloseListClick, onAddList}) => {
             "color": color
         });
         popupInputChange('')
+        onCloseListClick();
     }
 
     return (

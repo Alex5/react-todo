@@ -4,8 +4,6 @@ import Popup from "./Popup/Popup";
 
 import './AddList.scss'
 
-
-
 const AddListButton = ({colors, onAddList}) => {
 
     const [visiblePopup, setVisiblePopup] = useState(false)

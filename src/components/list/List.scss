@@ -4,6 +4,8 @@
   align-items: center;
   padding-top: 57px;
 
+  $self: &;
+
   &__add-button {
 
     opacity: 0.5;
@@ -11,7 +13,10 @@
     &:hover {
       opacity: 1;
     }
+
   }
+
+
 
   li {
     display: flex;
@@ -21,6 +26,19 @@
     width: 160px;
     cursor: pointer;
 
+    &:hover #{$self}__remove-btn {
+      opacity: 0.3;
+      margin-right: 14px;
+    }
+
+    #{$self}__remove-btn {
+      opacity: 0;
+
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+
     &.active {
       background: #FFFFFF;
       box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
@@ -28,8 +46,14 @@
     }
 
     &:hover {
-      background: rgba(255, 255, 255, 0.45);
+      background: rgba(255, 255, 255, 0.44);
       border-radius: 4px;
+    }
+
+
+
+    span {
+      flex: 1;
     }
 
     .badge {
@@ -40,6 +64,7 @@
       &--grey {
         background-color: #C9D1D3;
       }
+
       &--green {
         background-color: #42B883;
       }
@@ -59,9 +84,11 @@
       &--purple {
         background-color: #C355F5;
       }
+
       &--black {
         background-color: #110133;
       }
+
       &--red {
         background-color: #FF6464;
       }

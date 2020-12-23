@@ -1,8 +1,9 @@
 import React from 'react';
 import './List.scss'
 import classNames from "classnames";
+import removeBtn from './../../assets/img/removeBtn.svg'
 
-const List = ({items, onClick}) => {
+const List = ({items,isRemovable, onClick, onRemove}) => {
     return (
         <div>
             <ul onClick={onClick} className="list">
@@ -12,6 +13,7 @@ const List = ({items, onClick}) => {
                             {item.icon ? item.icon : <i className={`badge badge--${item.color}`}/>}
                         </i>
                         <span>{item.name}</span>
+                        {isRemovable && <img onClick={() => {onRemove(item)}} className="list__remove-btn" src={removeBtn} alt="Удалить список"/>}
                     </li>
                 ))}
             </ul>

@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import List from "./components/list/List";
 import AddListButton from "./components/AddList/AddListButton";
 import DB from './assets/db.json'
+import Tasks from "./components/Tasks/Tasks";
 
 const App = () => {
 
@@ -18,6 +19,11 @@ const App = () => {
         console.log(newList)
     }
 
+    const onRemove = (item) => {
+        alert(window.confirm("Удалить список?"))
+        console.log(item)
+    }
+
     return (
         <div className="App">
             <div className='todo'>
@@ -32,13 +38,14 @@ const App = () => {
                                         fill="#7C7C7C"/>
                                 </svg>
                             ),
-                            name: 'Все задачи'
+                            name: 'Все задачи',
+                            isRemovable: true
                         }
                     ]}/>
-                    <List items={lists}/>
+                    <List items={lists} isRemovable onRemove={onRemove}/>
                     <AddListButton onAddList={onAddList} colors={DB.colors}/>
                 </div>
-                <div className="todo__tasks">TASKS</div>
+                <Tasks />
             </div>
         </div>
     );
