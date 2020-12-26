@@ -6,7 +6,8 @@ import axios from "axios";
 const Popup = ({colors, onCloseListClick, onAddList}) => {
 
     const [popupInput, popupInputChange] = (useState(''))
-    const [selectedColor, selectColor] = useState(colors[0].id)
+    const [selectedColor, selectColor] = useState(null)
+    const [isLoading, setIsLoading] = useState(null)
 
     const onPopupInputChange = (e) => {
         popupInputChange(e.target.value);
@@ -16,26 +17,25 @@ const Popup = ({colors, onCloseListClick, onAddList}) => {
         if (Array.isArray(colors)) {
             selectColor(colors[0].id)
         }
-    }, [colors])
+    }, [colors]);
 
     const onAddListClick = () => {
         if (!popupInput) {
             alert('Введите название списка')
             return;
         }
+        setIsLoading(true)
         const color = colors.filter(color => color.id === selectedColor)[0].name;
         axios.post('http://localhost:3001/lists', {name: popupInput, colorId: selectedColor})
             .then(({data}) => {
                 const colorObj = {...data, color: {name: color}}
                 onAddList(colorObj);
+                popupInputChange('')
+                onCloseListClick();
             })
-
-        // "id": Math.random(),
-        // "name": popupInput,
-        // "colorId": selectedColor,
-        // "color": color
-        popupInputChange('')
-        onCloseListClick();
+            .catch(() => {
+                setIsLoading(false)
+            })
     }
 
     return (
@@ -46,7 +46,9 @@ const Popup = ({colors, onCloseListClick, onAddList}) => {
             <div onClick={onCloseListClick} className="close-button">
                 <img src={closeAddListBtn} alt="Закрыть"/>
             </div>
-            <button onClick={onAddListClick} className="button">Добавить</button>
+            <button onClick={onAddListClick} className="button">
+                {isLoading ? "Добавление..." : "Добавить"}
+            </button>
         </div>
     )
 }

@@ -23,9 +23,10 @@ const App = () => {
         console.log(newList)
     }
 
-    const onRemove = (item) => {
-        alert(window.confirm("Удалить список?"))
-        console.log(item)
+    const onRemove = (id) => {
+        const newLists = lists.filter(item => item.id !== id)
+        console.log(lists, newLists)
+        setLists(newLists)
     }
 
     return (
