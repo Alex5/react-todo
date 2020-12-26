@@ -10,7 +10,7 @@ const List = ({items,isRemovable, onClick, onRemove}) => {
                 {items.map((item, index) => (
                     <li key={index} className={classNames(item.className, {active: item.active})}>
                         <i>
-                            {item.icon ? item.icon : <i className={`badge badge--${item.color}`}/>}
+                            {item.icon ? item.icon : <i className={`badge badge--${item.color.name}`}/>}
                         </i>
                         <span>{item.name}</span>
                         {isRemovable && <img onClick={() => {onRemove(item)}} className="list__remove-btn" src={removeBtn} alt="Удалить список"/>}

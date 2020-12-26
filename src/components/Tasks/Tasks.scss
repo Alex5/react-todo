@@ -1,12 +1,32 @@
+.checkbox__items {
+  display: flex;
+  align-items: center;
+
+
+  &-name p {
+    font-size: 16px;
+    font-weight: 500;
+  }
+}
+
+
 .tasks {
   flex: 1;
+
+  margin: 0 57px 0 57px;
 
   &__title {
     display: flex;
     align-items: center;
     padding: 57px 0 20px 0;
-    margin: 0 57px 0 57px;
-    border-bottom: 1px solid #F2F2F2;
+
+    &-line {
+      background-color: #F2F2F2;
+      height: 1px;
+      width: 100%;
+      border: none;
+      margin-bottom: 20px;
+    }
 
     &:hover {
       img {
@@ -33,6 +53,57 @@
 
       &:active {
         opacity: 1;
+      }
+    }
+  }
+
+
+
+  .checkbox {
+
+    input {
+      display: none;
+    }
+
+    label {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 20px;
+      height: 20px;
+      border: 2px solid #E8E8E8;
+      border-radius: 30px;
+      cursor: pointer;
+      margin-right: 15px;
+
+      &:hover {
+        background-color: #F2F2F2;
+        border-color: #F2F2F2;
+
+        svg {
+          display: flex;
+
+          path {
+            stroke: #B2B2B2;
+          }
+        }
+      }
+
+      svg {
+        display: none;
+      }
+    }
+
+    input:checked + label {
+      border-color: #4DD599;
+      background-color: #4DD599;
+
+      svg {
+        display: flex;
+
+        path {
+          stroke: #FFFFFF;
+        }
       }
     }
   }

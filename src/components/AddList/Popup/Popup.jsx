@@ -1,6 +1,7 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Badge from "../../Badge/Badge";
 import closeAddListBtn from "../../../assets/img/Vector.svg";
+import axios from "axios";
 
 const Popup = ({colors, onCloseListClick, onAddList}) => {
 
@@ -11,25 +12,36 @@ const Popup = ({colors, onCloseListClick, onAddList}) => {
         popupInputChange(e.target.value);
     }
 
+    useEffect(() => {
+        if (Array.isArray(colors)) {
+            selectColor(colors[0].id)
+        }
+    }, [colors])
+
     const onAddListClick = () => {
         if (!popupInput) {
             alert('Введите название списка')
             return;
         }
         const color = colors.filter(color => color.id === selectedColor)[0].name;
-        onAddList({
-            "id": Math.random(),
-            "name": popupInput,
-            "colorId": selectedColor,
-            "color": color
-        });
+        axios.post('http://localhost:3001/lists', {name: popupInput, colorId: selectedColor})
+            .then(({data}) => {
+                const colorObj = {...data, color: {name: color}}
+                onAddList(colorObj);
+            })
+
+        // "id": Math.random(),
+        // "name": popupInput,
+        // "colorId": selectedColor,
+        // "color": color
         popupInputChange('')
         onCloseListClick();
     }
 
     return (
         <div className="add-list__popup">
-            <input autoFocus={true} onChange={onPopupInputChange} value={popupInput} className="field" placeholder="Название папки"/>
+            <input autoFocus={true} onChange={onPopupInputChange} value={popupInput} className="field"
+                   placeholder="Название папки"/>
             <Badge selectedColor={selectedColor} selectColor={selectColor} colors={colors}/>
             <div onClick={onCloseListClick} className="close-button">
                 <img src={closeAddListBtn} alt="Закрыть"/>

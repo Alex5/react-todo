@@ -4,7 +4,7 @@ import Popup from "./Popup/Popup";
 
 import './AddList.scss'
 
-const AddListButton = ({colors, onAddList}) => {
+const AddList = ({colors, onAddList}) => {
 
     const [visiblePopup, setVisiblePopup] = useState(false)
 
@@ -44,4 +44,4 @@ const AddListButton = ({colors, onAddList}) => {
     )
 }
 
-export default AddListButton;
+export default AddList;

@@ -1,17 +1,21 @@
-import React, {useState} from 'react';
-import List from "./components/list/List";
-import AddListButton from "./components/AddList/AddListButton";
-import DB from './assets/db.json'
-import Tasks from "./components/Tasks/Tasks";
+import React, {useState, useEffect} from 'react';
+
+import {List, AddListButton, Tasks} from './components'
+
+import axios from "axios";
 
 const App = () => {
 
-    const [lists, setLists] = useState(
-        DB.lists.map(item => {
-            item.color = DB.colors.filter(color => color.id === item.colorId)[0].name;
-            return item;
-        })
-    )
+    const [lists, setLists] = useState(null);
+    const [colors, setColors] = useState(null);
+
+    useEffect(() => {
+        axios.get('http://localhost:3001/lists?_expand=color&_embed=tasks').then(({data}) => {
+            setLists(data);
+        });
+        axios.get('http://localhost:3001/colors').then(({data}) => {
+            setColors(data)
+        })}, [])
 
     const onAddList = (obj) => {
         const newList = [...lists, obj]
@@ -42,10 +46,10 @@ const App = () => {
                             isRemovable: true
                         }
                     ]}/>
-                    <List items={lists} isRemovable onRemove={onRemove}/>
-                    <AddListButton onAddList={onAddList} colors={DB.colors}/>
+                    {lists ? <List items={lists} isRemovable onRemove={onRemove}/> : "Загрузка..."}
+                    <AddListButton onAddList={onAddList} colors={colors}/>
                 </div>
-                <Tasks />
+                <Tasks/>
             </div>
         </div>
     );
