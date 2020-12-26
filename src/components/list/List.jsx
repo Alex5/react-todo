@@ -12,10 +12,9 @@ const List = ({items, isRemovable, onClick, onRemove}) => {
         }
     }
     return (
-        <div>
             <ul onClick={onClick} className="list">
-                {items.map((item, index) => (
-                    <li key={index} className={classNames(item.className, {active: item.active})}>
+                {items.map(item => (
+                    <li className={classNames(item.className, {active: item.active})}>
                         <i>
                             {item.icon ? item.icon : <i className={`badge badge--${item.color.name}`}/>}
                         </i>
@@ -26,7 +25,6 @@ const List = ({items, isRemovable, onClick, onRemove}) => {
                     </li>
                 ))}
             </ul>
-        </div>
     )
 }
 

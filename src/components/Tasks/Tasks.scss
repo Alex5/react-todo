@@ -1,11 +1,14 @@
 .checkbox__items {
   display: flex;
   align-items: center;
+  margin-bottom: 20px;
 
-
-  &-name p {
+  &-text input {
     font-size: 16px;
     font-weight: 500;
+    border: none;
+    width: 600px;
+    padding: 5px;
   }
 }
 

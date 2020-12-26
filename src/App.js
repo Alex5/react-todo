@@ -15,7 +15,8 @@ const App = () => {
         });
         axios.get('http://localhost:3001/colors').then(({data}) => {
             setColors(data)
-        })}, [])
+        });
+    }, [])
 
     const onAddList = (obj) => {
         const newList = [...lists, obj]
@@ -50,7 +51,7 @@ const App = () => {
                     {lists ? <List items={lists} isRemovable onRemove={onRemove}/> : "Загрузка..."}
                     <AddListButton onAddList={onAddList} colors={colors}/>
                 </div>
-                <Tasks/>
+                {lists ? <Tasks list={lists[1]}/> : "Загрузка..."}
             </div>
         </div>
     );

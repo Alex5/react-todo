@@ -19,11 +19,11 @@ body {
 
 .todo {
   display: flex;
-  width: 900px;
+  width: 1000px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 
   &__sidebar {
-    width: 200px;
+    width: 250px;
     height: 100%;
     background-color: #F4F6F8;
     border-right: 1px solid #F1F1F1;
@@ -62,6 +62,7 @@ body {
 
 input::placeholder {
   color: #C7C7C7;
+  border: none;
 }
 
 
