@@ -11,10 +11,10 @@ const App = () => {
     const [activeItem, setActiveItem] = useState(null);
 
     useEffect(() => {
-        axios.get('https://react-todo-two-psi.vercel.app/lists?_expand=color&_embed=tasks').then(({data}) => {
+        axios.get('https://mockend.com/org/repo/lists?_expand=color&_embed=tasks').then(({data}) => {
             setLists(data);
         });
-        axios.get('https://react-todo-two-psi.vercel.app/colors').then(({data}) => {
+        axios.get('https://mockend.com/org/repo/colors').then(({data}) => {
             setColors(data)
         });
     }, [])
