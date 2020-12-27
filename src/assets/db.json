@@ -29,6 +29,11 @@
       "name": "Личное",
       "colorId": 1,
       "id": 8
+    },
+    {
+      "name": "Гавно",
+      "colorId": 3,
+      "id": 9
     }
   ],
   "tasks": [
