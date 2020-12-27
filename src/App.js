@@ -25,6 +25,28 @@ const App = () => {
         console.log(newList)
     }
 
+
+    const onAddTask = (listsId ,taskObj) => {
+        const newList = lists.map(item => {
+            if (item.id === listsId) {
+                item.tasks = [...item.tasks, taskObj]
+            }
+            return item;
+        })
+        setLists(newList)
+    }
+
+    const onEditListItem = (id, title) => {
+       const newList = lists.map(item => {
+            if (item.id === id) {
+                item.name = title;
+            }
+            return item;
+        });
+        setLists(newList);
+    };
+
+
     const onRemove = (id) => {
         const newLists = lists.filter(item => item.id !== id)
         console.log(lists, newLists)
@@ -41,6 +63,7 @@ const App = () => {
                 <div className="todo__sidebar">
                     <List items={[
                         {
+                            active: true,
                             icon: (
                                 <svg width="18" height="18" viewBox="0 0 18 18" fill="none"
                                      xmlns="http://www.w3.org/2000/svg">
@@ -50,13 +73,18 @@ const App = () => {
                                 </svg>
                             ),
                             name: 'Все задачи',
-                            isRemovable: true
+                            isRemovable: false
                         }
                     ]}/>
-                    {lists ? <List activeItem={activeItem}  onClickItem={onClickItem} items={lists} isRemovable onRemove={onRemove}/> : "Загрузка..."}
+                    {lists ? <List activeItem={activeItem} onClickItem={onClickItem} items={lists} isRemovable
+                                   onRemove={onRemove}/> : "Загрузка..."}
                     <AddListButton onAddList={onAddList} colors={colors}/>
                 </div>
-                {lists && activeItem ? <Tasks onEditTitle={()=>{}} list={activeItem}/> : "Загрузка..."}
+                {lists && activeItem ?
+                    <Tasks
+                        onAddTask={onAddTask}
+                        onEditTitle={onEditListItem}
+                        list={activeItem}/> : "Загрузка..."}
             </div>
         </div>
     );

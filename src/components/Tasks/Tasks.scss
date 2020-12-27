@@ -1,13 +1,45 @@
+/* width */
+::-webkit-scrollbar {
+  width: 7px;
+}
+
+::-webkit-scrollbar:hover {
+  width: 14px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f3f3f3;
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #e5e5e5;
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #cecece;
+}
+
+.checkbox__body {
+  overflow: auto;
+  height: auto;
+  max-height: 430px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.09);
+}
+
 .checkbox__items {
   display: flex;
   align-items: center;
   margin-bottom: 20px;
-
   &-text input {
     font-size: 16px;
     font-weight: 500;
     border: none;
-    width: 600px;
+    min-width: 500px;
     padding: 5px;
   }
 }
@@ -18,7 +50,7 @@
   margin: 0 57px 0 57px;
 
   .no-tasks {
-    font-family: Montserrat;
+    font-family: Montserrat, sans-serif;
     top: 50%;
     left: 50%;
     text-align: center;
@@ -72,7 +104,47 @@
     }
   }
 
+  &__form {
 
+    &-block {
+      .button {
+        margin-top: 15px;
+        margin-right: 10px;
+      }
+    }
+
+    &-new {
+      display: flex;
+      align-items: center;
+      padding: 13px;
+      width: 120px;
+      border-radius: 4px;
+
+      img {
+        margin-right: 11px;
+      }
+
+      span {
+        color: gray;
+        transition: 0.3s;
+        font-weight: 500;
+      }
+
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.05);
+        cursor: pointer;
+        transition: 0.3s;
+
+        span {
+          color: black;
+        }
+      }
+
+      &:active {
+        background-color: rgba(0, 0, 0, 0.15);
+      }
+    }
+  }
 
   .checkbox {
 

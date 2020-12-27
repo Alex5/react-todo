@@ -34,13 +34,16 @@ const Popup = ({colors, onCloseListClick, onAddList}) => {
                 onCloseListClick();
             })
             .catch(() => {
+                alert('Ошибка добавления списка!')
+            })
+            .finally(() => {
                 setIsLoading(false)
             })
     }
 
     return (
         <div className="add-list__popup">
-            <input autoFocus={true} onChange={onPopupInputChange} value={popupInput} className="field"
+            <input autoFocus={true} onChange={onPopupInputChange} value={popupInput} className="field field__popup"
                    placeholder="Название папки"/>
             <Badge selectedColor={selectedColor} selectColor={selectColor} colors={colors}/>
             <div onClick={onCloseListClick} className="close-button">

@@ -17,7 +17,7 @@ const List = ({items, isRemovable, onClick, onRemove, onClickItem, activeItem}) 
                 <li key={Math.random()} onClick={onClickItem ? () => {
                     onClickItem(item)
                 } : null} className={classNames(item.className, {
-                    active: activeItem && activeItem.id === item.id
+                    active: item.active ? item.active : activeItem && activeItem.id === item.id
                 })}>
                     <i>
                         {item.icon ? item.icon : <i className={`badge badge--${item.color.name}`}/>}
