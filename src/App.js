@@ -11,11 +11,10 @@ const App = () => {
     const [activeItem, setActiveItem] = useState(null);
 
     useEffect(() => {
-        axios.get('https://react-todo-two-psi.vercel.app/org/repo/lists/1').then(({data}) => {
-            console.log(data)
+        axios.get('http://localhost:3001/lists?_expand=color&_embed=tasks').then(({data}) => {
             setLists(data);
         });
-        axios.get('https://react-todo-two-psi.vercel.app/org/repo/colors').then(({data}) => {
+        axios.get('http://localhost:3001/colors').then(({data}) => {
             setColors(data)
         });
     }, [])
