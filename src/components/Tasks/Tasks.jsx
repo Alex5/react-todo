@@ -6,7 +6,7 @@ import './Tasks.scss'
 const Tasks = ({list, onEditTitle}) => {
 
     const onEdit = () => {
-        onEditTitle(1, "Title")
+        console.log(onEditTitle)
     }
 
     return (
@@ -14,7 +14,7 @@ const Tasks = ({list, onEditTitle}) => {
             <div className="tasks__header">
                 <div className="tasks__title">
                     <h2>{list.name}</h2>
-                    <img onClick={onEdit} className="tasks__title-editBtn" src={editBtn} alt="Изменить заголовок"/>
+                    <img onClick={()=>{onEdit(1, "Title")}} className="tasks__title-editBtn" src={editBtn} alt="Изменить заголовок"/>
                 </div>
                 <hr className="tasks__title-line"/>
             </div>
