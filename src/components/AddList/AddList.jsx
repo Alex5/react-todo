@@ -18,7 +18,7 @@ const AddList = ({colors, onAddList}) => {
 
     return (
         <div className="add-list">
-            <List onClick={onAddListClick} items={[
+            <List  onClick={onAddListClick} items={[
                 {
                     className: "list__add-button",
                     icon: (
@@ -39,7 +39,6 @@ const AddList = ({colors, onAddList}) => {
             {visiblePopup &&
             <Popup onAddList={onAddList} colors={colors} onCloseListClick={onCloseListClick}/>
             }
-
         </div>
     )
 }

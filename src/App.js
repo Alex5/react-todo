@@ -8,6 +8,7 @@ const App = () => {
 
     const [lists, setLists] = useState(null);
     const [colors, setColors] = useState(null);
+    const [activeItem, setActiveItem] = useState(null);
 
     useEffect(() => {
         axios.get('http://localhost:3001/lists?_expand=color&_embed=tasks').then(({data}) => {
@@ -30,6 +31,10 @@ const App = () => {
         setLists(newLists)
     }
 
+    const onClickItem = (item) => {
+        setActiveItem(item)
+    }
+
     return (
         <div className="App">
             <div className='todo'>
@@ -48,10 +53,10 @@ const App = () => {
                             isRemovable: true
                         }
                     ]}/>
-                    {lists ? <List items={lists} isRemovable onRemove={onRemove}/> : "Загрузка..."}
+                    {lists ? <List activeItem={activeItem}  onClickItem={onClickItem} items={lists} isRemovable onRemove={onRemove}/> : "Загрузка..."}
                     <AddListButton onAddList={onAddList} colors={colors}/>
                 </div>
-                {lists ? <Tasks list={lists[1]}/> : "Загрузка..."}
+                {lists && activeItem ? <Tasks onEditTitle={()=>{}} list={activeItem}/> : "Загрузка..."}
             </div>
         </div>
     );
