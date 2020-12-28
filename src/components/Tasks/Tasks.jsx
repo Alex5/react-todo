@@ -8,7 +8,7 @@ import axios from "axios";
 import AddTasksForm from "./AddTasksForm";
 
 
-const Tasks = ({list, onEditTitle, onAddTask}) => {
+const Tasks = ({list, onEditTitle, onAddTask, withoutEmpty}) => {
 
     const editTitle = () => {
         const newTitle = window.prompt('Названия списка', list.name)
@@ -27,15 +27,15 @@ const Tasks = ({list, onEditTitle, onAddTask}) => {
         <div className="tasks">
             <div className="tasks__header">
                 <div className="tasks__title">
-                    <h2>{list.name}</h2>
+                    <h2 style={{color: list.color.hex}}>{list.name}</h2>
                     <img onClick={editTitle}
                          className="tasks__title-editBtn" src={editBtn} alt="Изменить заголовок"/>
                 </div>
                 <hr className="tasks__title-line"/>
             </div>
-            {list.tasks.length === 0 && <h1 className="no-tasks">Задачи отсутствуют</h1>}
+            {!withoutEmpty && list.tasks && !list.tasks.length && <h1 className="no-tasks">Задачи отсутствуют</h1>}
             <div className="checkbox__body">
-                {list.tasks.map(item => (
+                {list.tasks && list.tasks.map(item => (
                     <div key={item.id} className="checkbox__items">
                         <div className="checkbox">
                             <input id={item.id} type="checkbox"/>

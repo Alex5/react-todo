@@ -47,7 +47,7 @@ const AddTasksForm = ({list, onAddTask}) => {
                 ? <div className="tasks__form-block">
                     <input value={inputValue} onChange={e => setInputValue(e.target.value)} autoFocus={true} className="field"
                            placeholder="Текст задачи"/>
-                    <button onClick={addTask} disabled={isSending} className="button">{isSending ? 'Добавление...' : 'Добавить задачи'}</button>
+                    <button onClick={addTask} disabled={isSending} className="button">{isSending ? 'Добавление задачи...' : 'Добавить задачи'}</button>'
                     <button onClick={toggleFormVisible} className="button button--grey">Отмена</button>
                 </div>
                 : <div onClick={toggleFormVisible} className="tasks__form-new">

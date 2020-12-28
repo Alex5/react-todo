@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import {Route, useHistory, useLocation} from 'react-router-dom'
 
 import {List, AddListButton, Tasks} from './components'
 
@@ -9,6 +10,10 @@ const App = () => {
     const [lists, setLists] = useState(null);
     const [colors, setColors] = useState(null);
     const [activeItem, setActiveItem] = useState(null);
+    let history = useHistory();
+    let location = useLocation()
+
+    console.log(history)
 
     useEffect(() => {
         axios.get('http://localhost:3001/lists?_expand=color&_embed=tasks').then(({data}) => {
@@ -19,14 +24,14 @@ const App = () => {
         });
     }, [])
 
-    const onAddList = (obj) => {
+    const onAddList = obj => {
         const newList = [...lists, obj]
         setLists(newList)
         console.log(newList)
     }
 
 
-    const onAddTask = (listsId ,taskObj) => {
+    const onAddTask = (listsId, taskObj) => {
         const newList = lists.map(item => {
             if (item.id === listsId) {
                 item.tasks = [...item.tasks, taskObj]
@@ -37,7 +42,7 @@ const App = () => {
     }
 
     const onEditListItem = (id, title) => {
-       const newList = lists.map(item => {
+        const newList = lists.map(item => {
             if (item.id === id) {
                 item.name = title;
             }
@@ -53,17 +58,23 @@ const App = () => {
         setLists(newLists)
     }
 
-    const onClickItem = (item) => {
-        setActiveItem(item)
-    }
+    useEffect(() => {
+        const listId = history.location.pathname.split('lists/')[1];
+        if (lists) {
+            const list = lists.find(list => list.id === Number(listId));
+            setActiveItem(list);
+        }
+    }, [lists, history.location.pathname]);
 
     return (
         <div className="App">
             <div className='todo'>
                 <div className="todo__sidebar">
-                    <List items={[
+                    <List onClickItem={() => {
+                        history.push(`/`)
+                    }} items={[
                         {
-                            active: true,
+                            active: history.location.pathname === '/',
                             icon: (
                                 <svg width="18" height="18" viewBox="0 0 18 18" fill="none"
                                      xmlns="http://www.w3.org/2000/svg">
@@ -76,15 +87,34 @@ const App = () => {
                             isRemovable: false
                         }
                     ]}/>
-                    {lists ? <List activeItem={activeItem} onClickItem={onClickItem} items={lists} isRemovable
-                                   onRemove={onRemove}/> : "Загрузка..."}
+                    {lists ? <List
+                        activeItem={activeItem}
+                        onClickItem={(list) => {
+                            history.push(`/lists/${list.id}`);
+                        }}
+                        items={lists} isRemovable
+                        onRemove={onRemove}/> : "Загрузка..."}
                     <AddListButton onAddList={onAddList} colors={colors}/>
                 </div>
-                {lists && activeItem ?
-                    <Tasks
-                        onAddTask={onAddTask}
-                        onEditTitle={onEditListItem}
-                        list={activeItem}/> : "Загрузка..."}
+                <div className="todo__tasks">
+                    <Route exact path="/">
+                        {lists && lists.map(list => (
+                            <Tasks
+                                onAddTask={onAddTask}
+                                onEditTitle={onEditListItem}
+                                list={list}
+                                withoutEmpty
+                            />
+                        ))}
+                    </Route>
+                    <Route path="/lists/:id">
+                        {lists && activeItem ?
+                            <Tasks
+                                onAddTask={onAddTask}
+                                onEditTitle={onEditListItem}
+                                list={activeItem}/> : "Загрузка..."}
+                    </Route>
+                </div>
             </div>
         </div>
     );
