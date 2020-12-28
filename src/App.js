@@ -30,7 +30,6 @@ const App = () => {
         console.log(newList)
     }
 
-
     const onAddTask = (listsId, taskObj) => {
         const newList = lists.map(item => {
             if (item.id === listsId) {
@@ -40,6 +39,69 @@ const App = () => {
         })
         setLists(newList)
     }
+
+    const onRemoveTask = (listId, taskId) => {
+        if (window.confirm("Вы действительно хотите удалить задачю")) {
+            const newList = lists.map(item => {
+                if (item.id === listId) {
+                    item.tasks = item.tasks.filter(task => task.id !== taskId)
+                }
+                return item;
+            })
+            setLists(newList)
+            axios.delete('http://localhost:3001/tasks/' + taskId)
+                .catch(() => {
+                    alert("Не удалось задачу")
+                })
+        }
+    }
+
+    const onEditTask = (listId, taskObj) => {
+        const newTaskText = window.prompt('Текст задачи', taskObj.text);
+        if (!newTaskText) return;
+        const newList = lists.map(item => {
+            if (item.id === listId) {
+                item.tasks = item.tasks.map(task => {
+                    if (task.id === taskObj.id) {
+                        task.text = newTaskText;
+                    }
+                    return task;
+                })
+            }
+            return item;
+        })
+        setLists(newList)
+        axios
+            .patch('http://localhost:3001/tasks/' + taskObj.id, {
+                text: newTaskText
+            })
+            .catch(() => {
+                alert("Не удалось обновить текст задачи")
+            })
+    }
+
+    const onCompletedTask = (listId, taskId, completed) => {
+        const newList = lists.map(item => {
+            if (item.id === listId) {
+                item.tasks = item.tasks.map(task => {
+                    if (task.id === taskId) {
+                        task.completed = completed;
+                    }
+                    return task;
+                })
+            }
+            return item;
+        })
+        setLists(newList)
+        axios
+            .patch('http://localhost:3001/tasks/' + taskId, {
+                completed
+            })
+            .catch(() => {
+                alert("Не удалось обновить задачу")
+            })
+    }
+
 
     const onEditListItem = (id, title) => {
         const newList = lists.map(item => {
@@ -51,12 +113,12 @@ const App = () => {
         setLists(newList);
     };
 
-
     const onRemove = (id) => {
         const newLists = lists.filter(item => item.id !== id)
         console.log(lists, newLists)
         setLists(newLists)
     }
+
 
     useEffect(() => {
         const listId = history.location.pathname.split('lists/')[1];
@@ -104,12 +166,17 @@ const App = () => {
                                 onEditTitle={onEditListItem}
                                 list={list}
                                 withoutEmpty
+                                onRemoveTask={onRemoveTask}
+                                onCompletedTask={onCompletedTask}
                             />
                         ))}
                     </Route>
                     <Route path="/lists/:id">
                         {lists && activeItem ?
                             <Tasks
+                                onRemoveTask={onRemoveTask}
+                                onCompletedTask={onCompletedTask}
+                                onEditTask={onEditTask}
                                 onAddTask={onAddTask}
                                 onEditTitle={onEditListItem}
                                 list={activeItem}/> : "Загрузка..."}

@@ -25,10 +25,12 @@ const Popup = ({colors, onCloseListClick, onAddList}) => {
             return;
         }
         setIsLoading(true)
-        const color = colors.filter(color => color.id === selectedColor)[0].name;
-        axios.post('http://localhost:3001/lists', {name: popupInput, colorId: selectedColor})
+
+        axios
+            .post('http://localhost:3001/lists', {name: popupInput, colorId: selectedColor})
             .then(({data}) => {
-                const colorObj = {...data, color: {name: color}}
+                const color = colors.filter(color => color.id === selectedColor)[0];
+                const colorObj = {...data, color, tasks: []}
                 onAddList(colorObj);
                 popupInputChange('')
                 onCloseListClick();

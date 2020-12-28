@@ -36,13 +36,38 @@
 .checkbox__items {
   display: flex;
   align-items: center;
-  margin-bottom: 20px;
-  &-text input {
-    font-size: 16px;
-    font-weight: 500;
-    border: none;
-    min-width: 500px;
-    padding: 5px;
+  margin-bottom: 15px;
+
+  &-text {
+
+    p {
+      font-size: 16px;
+      font-weight: 500;
+      border: none;
+      min-width: 500px;
+      padding: 10px;
+      margin-right: 10px;
+
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.05);
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+.checkbox__items-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 10px;
+  padding: 15px;
+  margin-right: 10px;
+  border-radius: 5px;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+    cursor: pointer;
   }
 }
 
@@ -113,6 +138,9 @@
   &__form {
 
     &-block {
+      display: flex;
+      flex-direction: column;
+
       .button {
         margin-top: 15px;
         margin-right: 10px;

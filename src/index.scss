@@ -20,7 +20,7 @@ body {
 
 .todo {
   display: flex;
-  width: 900px;
+  width: 950px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 
   &__sidebar {
@@ -68,13 +68,17 @@ body {
 }
 
 .field {
-  min-width: 500px;
   border: 1px solid #EFEFEF;
   border-radius: 4px;
   font-size: 14px;
   padding: 12px;
   line-height: 17px;
   outline: none;
+
+  &-checked {
+    transition: 0.3s;
+    text-decoration: line-through;
+  }
 
   &__popup {
     min-width: unset;
@@ -86,7 +90,7 @@ body {
   }
 }
 
-input::placeholder {
+p::placeholder {
   color: #C7C7C7;
   border: none;
 }

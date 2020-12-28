@@ -4,6 +4,7 @@ import axios from "axios";
 import addBtn from "../../assets/img/addBtn.svg";
 
 import './Tasks.scss'
+import {AddListButton} from "../index";
 
 const AddTasksForm = ({list, onAddTask}) => {
 
@@ -17,7 +18,7 @@ const AddTasksForm = ({list, onAddTask}) => {
     }
 
     const addTask = () => {
-        const obj =  {
+        const obj = {
             listId: list.id,
             text: inputValue,
             completed: false
@@ -36,24 +37,37 @@ const AddTasksForm = ({list, onAddTask}) => {
                 alert('Ошибка при добавление задачи!')
             })
             .finally(() => {
-            setIsSending(false)
-        })
+                setIsSending(false)
+            })
 
     }
+
 
     return (
         <div className="tasks__form">
             {tasksVisibleForm
-                ? <div className="tasks__form-block">
-                    <input value={inputValue} onChange={e => setInputValue(e.target.value)} autoFocus={true} className="field"
-                           placeholder="Текст задачи"/>
-                    <button onClick={addTask} disabled={isSending} className="button">{isSending ? 'Добавление задачи...' : 'Добавить задачи'}</button>'
-                    <button onClick={toggleFormVisible} className="button button--grey">Отмена</button>
+                ?
+                <div className="tasks__form-block">
+                    <div>
+                        <input value={inputValue} onChange={e => setInputValue(e.target.value)} autoFocus={true}
+                                className="field"
+                                placeholder="Текст задачи"/>
+                    </div>
+                    <div>
+                        <button onClick={addTask} disabled={isSending}
+                                className="button">{isSending ? 'Добавление задачи...' : 'Добавить задачи'}</button>
+                        <button onClick={toggleFormVisible} className="button button--grey">Отмена</button>
+                    </div>
+
+
                 </div>
-                : <div onClick={toggleFormVisible} className="tasks__form-new">
+                :
+
+                <div onClick={toggleFormVisible} className="tasks__form-new">
                     <img src={addBtn} alt="Добавить задачу"/>
                     <span>Новая задача</span>
                 </div>
+
             }
         </div>
     )
