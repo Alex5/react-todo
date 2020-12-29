@@ -28,7 +28,7 @@ const Tasks = ({list, onEditTitle, onAddTask, withoutEmpty, onRemoveTask, onEdit
         <div className="tasks">
             <div className="tasks__header">
                 <div className="tasks__title">
-                    <h2 style={{color: list.color.hex}}>{list.name}</h2>
+                    <h2 style={{color: list.color}}>{list.name}</h2>
                     <img onClick={editTitle}
                          className="tasks__title-editBtn" src={editBtn} alt="Изменить заголовок"/>
                 </div>

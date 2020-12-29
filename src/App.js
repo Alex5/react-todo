@@ -1,5 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {Route, useHistory, useLocation} from 'react-router-dom'
+import './components/Tasks/Tasks.scss'
+import firebase from 'firebase'
 
 import {List, AddListButton, Tasks} from './components'
 
@@ -7,16 +9,27 @@ import axios from "axios";
 
 const App = () => {
 
+
+
     const [lists, setLists] = useState(null);
     const [colors, setColors] = useState(null);
     const [activeItem, setActiveItem] = useState(null);
     let history = useHistory();
     let location = useLocation()
 
-    console.log(history)
+    const db = firebase.database();
+    const listsArray = db.ref('lists');
+    listsArray.on('value', (elem) => {
+        const data = elem.val()
+        console.log(data)
+    })
+
 
     useEffect(() => {
-        axios.get('http://localhost:3001/lists?_expand=color&_embed=tasks').then(({data}) => {
+        // axios.get('http://localhost:3001/lists?_expand=color&_embed=tasks').then(({data}) => {
+        //     setLists(data);
+        // });
+        axios.get('https://ilyin-react-todo-default-rtdb.firebaseio.com/lists.json?_expand=color&_embed=tasks').then(({data}) => {
             setLists(data);
         });
         axios.get('http://localhost:3001/colors').then(({data}) => {
@@ -179,7 +192,7 @@ const App = () => {
                                 onEditTask={onEditTask}
                                 onAddTask={onAddTask}
                                 onEditTitle={onEditListItem}
-                                list={activeItem}/> : "Загрузка..."}
+                                list={activeItem}/> : <h1 className="add-tasks">Добавьте новую папку</h1>}
                     </Route>
                 </div>
             </div>

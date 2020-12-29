@@ -1,9 +1,6 @@
 import React from 'react';
 
-import editBtn from "../../assets/img/editBtnsvg.svg";
 import removeBtn from './../../assets/img/removeBtn.svg'
-
-import AddTasksForm from "./AddTasksForm";
 
 const Task = ({id, text, onRemove, onEdit, list, onCompletedTask, completed}) => {
 

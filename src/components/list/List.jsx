@@ -21,7 +21,7 @@ const List = ({items, isRemovable, onClick, onRemove, onClickItem, activeItem}) 
                         active: item.active ? item.active : activeItem && activeItem.id === item.id
                     })}>
                         <i>
-                            {item.icon ? item.icon : <i className={`badge badge--${item.color.name}`}/>}
+                            {item.icon ? item.icon : <i className={`badge badge--${item.color}`}/>}
                         </i>
                         <p>{item.name}</p><span>{item.tasks && `${item.tasks.length}`}</span>
                         {isRemovable && <img onClick={() => {

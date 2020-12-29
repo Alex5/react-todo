@@ -1,5 +1,0 @@
-{
-  "scripts": {
-    "fake-json": "json-server ./src/assets/db.json --watch --port 3001"
-  }
-}
