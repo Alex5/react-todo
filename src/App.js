@@ -25,8 +25,11 @@ const App = () => {
         // axios.get('http://localhost:3001/lists?_expand=color&_embed=tasks').then(({data}) => {
         //     console.log(data)
         // });
-        axios.get('https://ilyin-react-todo-default-rtdb.firebaseio.com/lists.json').then(({data}) => {
+        axios
+            .get('https://ilyin-react-todo-default-rtdb.firebaseio.com/lists.json/')
+            .then(({data}) => {
             setLists(data);
+            console.log(data)
         });
         axios.get('https://ilyin-react-todo-default-rtdb.firebaseio.com/colors.json').then(({data}) => {
             setColors(data)
@@ -166,7 +169,7 @@ const App = () => {
                         }}
                         items={lists} isRemovable
                         onRemove={onRemove}/> : "Загрузка..."}
-                    <AddListButton onAddList={onAddList} colors={colors}/>
+                    <AddListButton lists={lists} onAddList={onAddList} colors={colors}/>
                 </div>
                 <div className="todo__tasks">
                     <Route exact path="/">

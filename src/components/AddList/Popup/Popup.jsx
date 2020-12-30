@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import Badge from "../../Badge/Badge";
 import closeAddListBtn from "../../../assets/img/Vector.svg";
 import axios from "axios";
+import firebase from "firebase";
 
 const Popup = ({colors, onCloseListClick, onAddList}) => {
 
@@ -26,10 +27,15 @@ const Popup = ({colors, onCloseListClick, onAddList}) => {
         }
         setIsLoading(true)
 
+        const color = colors.filter(color => color.id === selectedColor)[0];
         axios
-            .post('https://ilyin-react-todo-default-rtdb.firebaseio.com/lists.json', {name: popupInput, colorId: selectedColor})
+            .post('https://ilyin-react-todo-default-rtdb.firebaseio.com/lists.json', {
+                name: popupInput,
+                colorId: selectedColor,
+                color: color
+            })
+
             .then(({data}) => {
-                const color = colors.filter(color => color.id === selectedColor)[0];
                 const colorObj = {...data, color, tasks: []}
                 onAddList(colorObj);
                 popupInputChange('')
@@ -51,7 +57,7 @@ const Popup = ({colors, onCloseListClick, onAddList}) => {
             <div onClick={onCloseListClick} className="close-button">
                 <img src={closeAddListBtn} alt="Закрыть"/>
             </div>
-            <button onClick={onAddListClick} className="button">
+            <button disabled onClick={onAddListClick} className="button">
                 {isLoading ? "Добавление..." : "Добавить"}
             </button>
         </div>

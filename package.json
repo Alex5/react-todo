@@ -10,6 +10,7 @@
     "classnames": "^2.2.6",
     "firebase": "^8.2.1",
     "node-sass": "4.14.1",
+    "object-to-array-convert": "^1.1.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-router-dom": "^5.2.0",
