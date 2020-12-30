@@ -5,7 +5,7 @@ import removeBtn from './../../assets/img/removeBtn.svg'
 import axios from 'axios';
 import {Link} from "react-router-dom";
 
-const List = ({items, isRemovable, onClick, onRemove, onClickItem, activeItem}) => {
+const List = ({items, isRemovable, onClick, onRemove, onClickItem, activeItem, colors}) => {
     const removeList = item => {
         if (window.confirm('Удалить?')) {
             axios.delete('http://localhost:3001/lists/' + item.id)
@@ -21,7 +21,7 @@ const List = ({items, isRemovable, onClick, onRemove, onClickItem, activeItem}) 
                         active: item.active ? item.active : activeItem && activeItem.id === item.id
                     })}>
                         <i>
-                            {item.icon ? item.icon : <i className={`badge badge--${item.color}`}/>}
+                            {item.icon ? item.icon : <i className={`badge badge--${item.color.name}`}/>}
                         </i>
                         <p>{item.name}</p><span>{item.tasks && `${item.tasks.length}`}</span>
                         {isRemovable && <img onClick={() => {

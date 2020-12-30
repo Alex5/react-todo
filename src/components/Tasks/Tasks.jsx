@@ -10,7 +10,7 @@ import Task from "./Task";
 import removeBtn from "../../assets/img/removeBtn.svg";
 
 
-const Tasks = ({list, onEditTitle, onAddTask, withoutEmpty, onRemoveTask, onEditTask, onCompletedTask}) => {
+const Tasks = ({list, onEditTitle, onAddTask, withoutEmpty, onRemoveTask, onEditTask, onCompletedTask, colors}) => {
 
     const editTitle = () => {
         const newTitle = window.prompt('Названия списка', list.name)
@@ -28,7 +28,7 @@ const Tasks = ({list, onEditTitle, onAddTask, withoutEmpty, onRemoveTask, onEdit
         <div className="tasks">
             <div className="tasks__header">
                 <div className="tasks__title">
-                    <h2 style={{color: list.color}}>{list.name}</h2>
+                    <h2 style={{color: list.color.hex}}>{list.name}</h2>
                     <img onClick={editTitle}
                          className="tasks__title-editBtn" src={editBtn} alt="Изменить заголовок"/>
                 </div>

@@ -1,38 +1,34 @@
 import React, {useState, useEffect} from 'react';
 import {Route, useHistory, useLocation} from 'react-router-dom'
 import './components/Tasks/Tasks.scss'
-import firebase from 'firebase'
 
 import {List, AddListButton, Tasks} from './components'
 
 import axios from "axios";
 
 const App = () => {
-
-
-
     const [lists, setLists] = useState(null);
     const [colors, setColors] = useState(null);
     const [activeItem, setActiveItem] = useState(null);
     let history = useHistory();
     let location = useLocation()
 
-    const db = firebase.database();
-    const listsArray = db.ref('lists');
-    listsArray.on('value', (elem) => {
-        const data = elem.val()
-        console.log(data)
-    })
+    // const db = firebase.database();
+    // const listsArray = db.ref('lists');
+    // listsArray.on('value', (elem) => {
+    //     const data = elem.val()
+    //     console.log(data)
+    // })
 
 
     useEffect(() => {
-        // axios.get('http://localhost:3001/lists?_expand=color&_embed=tasks').then(({data}) => {
-        //     setLists(data);
-        // });
-        axios.get('https://ilyin-react-todo-default-rtdb.firebaseio.com/lists.json?_expand=color&_embed=tasks').then(({data}) => {
+        axios.get('http://localhost:3001/lists?_expand=color&_embed=tasks').then(({data}) => {
+            console.log(data)
+        });
+        axios.get('https://ilyin-react-todo-default-rtdb.firebaseio.com/lists.json').then(({data}) => {
             setLists(data);
         });
-        axios.get('http://localhost:3001/colors').then(({data}) => {
+        axios.get('https://ilyin-react-todo-default-rtdb.firebaseio.com/colors.json').then(({data}) => {
             setColors(data)
         });
     }, [])
@@ -62,7 +58,7 @@ const App = () => {
                 return item;
             })
             setLists(newList)
-            axios.delete('http://localhost:3001/tasks/' + taskId)
+            axios.delete('https://ilyin-react-todo-default-rtdb.firebaseio.com/tasks.json' + taskId)
                 .catch(() => {
                     alert("Не удалось задачу")
                 })
@@ -85,7 +81,7 @@ const App = () => {
         })
         setLists(newList)
         axios
-            .patch('http://localhost:3001/tasks/' + taskObj.id, {
+            .patch('https://ilyin-react-todo-default-rtdb.firebaseio.com/tasks.json' + taskObj.id, {
                 text: newTaskText
             })
             .catch(() => {
@@ -107,7 +103,7 @@ const App = () => {
         })
         setLists(newList)
         axios
-            .patch('http://localhost:3001/tasks/' + taskId, {
+            .patch('https://ilyin-react-todo-default-rtdb.firebaseio.com/tasks.json' + taskId, {
                 completed
             })
             .catch(() => {
@@ -163,6 +159,7 @@ const App = () => {
                         }
                     ]}/>
                     {lists ? <List
+                        colors={colors}
                         activeItem={activeItem}
                         onClickItem={(list) => {
                             history.push(`/lists/${list.id}`);
@@ -175,9 +172,11 @@ const App = () => {
                     <Route exact path="/">
                         {lists && lists.map(list => (
                             <Tasks
+                                colors={colors}
                                 onAddTask={onAddTask}
                                 onEditTitle={onEditListItem}
                                 list={list}
+                                items={lists}
                                 withoutEmpty
                                 onRemoveTask={onRemoveTask}
                                 onCompletedTask={onCompletedTask}
@@ -187,6 +186,7 @@ const App = () => {
                     <Route path="/lists/:id">
                         {lists && activeItem ?
                             <Tasks
+                                colors={colors}
                                 onRemoveTask={onRemoveTask}
                                 onCompletedTask={onCompletedTask}
                                 onEditTask={onEditTask}

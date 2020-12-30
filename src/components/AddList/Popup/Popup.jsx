@@ -27,7 +27,7 @@ const Popup = ({colors, onCloseListClick, onAddList}) => {
         setIsLoading(true)
 
         axios
-            .post('http://localhost:3001/lists', {name: popupInput, colorId: selectedColor})
+            .post('https://ilyin-react-todo-default-rtdb.firebaseio.com/lists.json', {name: popupInput, colorId: selectedColor})
             .then(({data}) => {
                 const color = colors.filter(color => color.id === selectedColor)[0];
                 const colorObj = {...data, color, tasks: []}
