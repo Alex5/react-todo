@@ -22,9 +22,9 @@ const App = () => {
 
 
     useEffect(() => {
-        axios.get('http://localhost:3001/lists?_expand=color&_embed=tasks').then(({data}) => {
-            console.log(data)
-        });
+        // axios.get('http://localhost:3001/lists?_expand=color&_embed=tasks').then(({data}) => {
+        //     console.log(data)
+        // });
         axios.get('https://ilyin-react-todo-default-rtdb.firebaseio.com/lists.json').then(({data}) => {
             setLists(data);
         });
