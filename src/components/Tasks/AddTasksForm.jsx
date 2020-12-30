@@ -28,7 +28,7 @@ const AddTasksForm = ({list, onAddTask}) => {
             return;
         }
         setIsSending(true)
-        axios.post('http://localhost:3001/tasks', obj).then(({data}) => {
+        axios.post('https://ilyin-react-todo-default-rtdb.firebaseio.com/tasks.json', obj).then(({data}) => {
             console.log(data)
             onAddTask(list.id, data)
             toggleFormVisible()

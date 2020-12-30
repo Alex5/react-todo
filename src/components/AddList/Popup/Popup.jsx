@@ -57,7 +57,7 @@ const Popup = ({colors, onCloseListClick, onAddList}) => {
             <div onClick={onCloseListClick} className="close-button">
                 <img src={closeAddListBtn} alt="Закрыть"/>
             </div>
-            <button disabled onClick={onAddListClick} className="button">
+            <button onClick={onAddListClick} className="button">
                 {isLoading ? "Добавление..." : "Добавить"}
             </button>
         </div>

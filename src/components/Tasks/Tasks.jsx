@@ -16,7 +16,7 @@ const Tasks = ({list, onEditTitle, onAddTask, withoutEmpty, onRemoveTask, onEdit
         const newTitle = window.prompt('Названия списка', list.name)
         if (newTitle) {
             onEditTitle(list.id, newTitle)
-            axios.patch('https://ilyin-react-todo-default-rtdb.firebaseio.com/lists/' + list.id, {
+            axios.patch(`https://ilyin-react-todo-default-rtdb.firebaseio.com/lists/${list.id - 1}/.json`, {
                 name: newTitle
             }).catch(() => {
                 alert("Не удалось обновить название списка")

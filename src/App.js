@@ -25,12 +25,17 @@ const App = () => {
         // axios.get('http://localhost:3001/lists?_expand=color&_embed=tasks').then(({data}) => {
         //     console.log(data)
         // });
-        axios
-            .get('https://ilyin-react-todo-default-rtdb.firebaseio.com/lists.json/')
+        axios.get('https://ilyin-react-todo-default-rtdb.firebaseio.com/lists.json/')
             .then(({data}) => {
-            setLists(data);
-            console.log(data)
-        });
+                const list = [];
+                Object.keys(data).forEach((k, idx) => {
+                    list.push({
+                        ...data[k],
+                        id: idx + 1
+                    })
+                })
+                setLists(list);
+            });
         axios.get('https://ilyin-react-todo-default-rtdb.firebaseio.com/colors.json').then(({data}) => {
             setColors(data)
         });
@@ -60,8 +65,9 @@ const App = () => {
                 }
                 return item;
             })
+            https://ilyin-react-todo-default-rtdb.firebaseio.com/lists/0/tasks/0.json
             setLists(newList)
-            axios.delete('https://ilyin-react-todo-default-rtdb.firebaseio.com/tasks.json' + taskId)
+            axios.delete(`https://ilyin-react-todo-default-rtdb.firebaseio.com/lists/tasks/${taskId}.json`)
                 .catch(() => {
                     alert("Не удалось задачу")
                 })
