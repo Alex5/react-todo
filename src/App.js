@@ -13,30 +13,12 @@ const App = () => {
     let history = useHistory();
     let location = useLocation()
 
-    // const db = firebase.database();
-    // const listsArray = db.ref('lists');
-    // listsArray.on('value', (elem) => {
-    //     const data = elem.val()
-    //     console.log(data)
-    // })
-
-
     useEffect(() => {
-        // axios.get('http://localhost:3001/lists?_expand=color&_embed=tasks').then(({data}) => {
-        //     console.log(data)
-        // });
-        axios.get('https://ilyin-react-todo-default-rtdb.firebaseio.com/lists.json/')
-            .then(({data}) => {
-                const list = [];
-                Object.keys(data).forEach((k, idx) => {
-                    list.push({
-                        ...data[k],
-                        id: idx + 1
-                    })
-                })
-                setLists(list);
+        axios.get('/lists?_expand=color&_embed=tasks')
+            .then(({ data }) => {
+                setLists(data);
             });
-        axios.get('https://ilyin-react-todo-default-rtdb.firebaseio.com/colors.json').then(({data}) => {
+        axios.get('/colors').then(({data}) => {
             setColors(data)
         });
     }, [])
@@ -65,12 +47,10 @@ const App = () => {
                 }
                 return item;
             })
-            https://ilyin-react-todo-default-rtdb.firebaseio.com/lists/0/tasks/0.json
             setLists(newList)
-            axios.delete(`https://ilyin-react-todo-default-rtdb.firebaseio.com/lists/tasks/${taskId}.json`)
-                .catch(() => {
-                    alert("Не удалось задачу")
-                })
+            axios.delete('/tasks/' + taskId).catch(() => {
+                alert('Не удалось удалить задачу');
+            });
         }
     }
 
@@ -90,11 +70,11 @@ const App = () => {
         })
         setLists(newList)
         axios
-            .patch('https://ilyin-react-todo-default-rtdb.firebaseio.com/tasks.json' + taskObj.id, {
+            .patch('/tasks' + taskObj.id, {
                 text: newTaskText
             })
             .catch(() => {
-                alert("Не удалось обновить текст задачи")
+                alert("Не удалось обновить задачу")
             })
     }
 
@@ -112,7 +92,7 @@ const App = () => {
         })
         setLists(newList)
         axios
-            .patch('https://ilyin-react-todo-default-rtdb.firebaseio.com/tasks.json' + taskId, {
+            .patch('/tasks' + taskId, {
                 completed
             })
             .catch(() => {

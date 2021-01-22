@@ -9,6 +9,7 @@
     "axios": "^0.21.1",
     "classnames": "^2.2.6",
     "firebase": "^8.2.1",
+    "json-server": "^0.16.3",
     "node-sass": "4.14.1",
     "object-to-array-convert": "^1.1.0",
     "react": "^17.0.1",
@@ -19,10 +20,10 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "CI= react-scripts build",
+    "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "fake-json": "json-server ./src/assets/db.json --watch --port 3001"
+    "server": "node server.js",
+    "fake-json": "json-server public/db.json --watch --port 3001"
   },
   "eslintConfig": {
     "extends": [

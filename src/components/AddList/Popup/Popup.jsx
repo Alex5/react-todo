@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react';
 import Badge from "../../Badge/Badge";
 import closeAddListBtn from "../../../assets/img/Vector.svg";
 import axios from "axios";
-import firebase from "firebase";
 
 const Popup = ({colors, onCloseListClick, onAddList}) => {
 
@@ -29,7 +28,7 @@ const Popup = ({colors, onCloseListClick, onAddList}) => {
 
         const color = colors.filter(color => color.id === selectedColor)[0];
         axios
-            .post('https://ilyin-react-todo-default-rtdb.firebaseio.com/lists.json', {
+            .post('/lists', {
                 name: popupInput,
                 colorId: selectedColor,
                 color: color

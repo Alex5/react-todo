@@ -7,8 +7,9 @@ import axios from 'axios';
 const List = ({items, isRemovable, onClick, onRemove, onClickItem, activeItem}) => {
     const removeList = item => {
         if (window.confirm('Удалить?')) {
-            axios.delete(`https://ilyin-react-todo-default-rtdb.firebaseio.com/lists/${item.id - 1}.json` )
-            onRemove(item.id)
+            axios.delete('/lists/' + item.id).then(() => {
+                onRemove(item.id);
+            });
         }
     }
     return (

@@ -8,7 +8,6 @@ const Task = ({id, text, onRemove, onEdit, list, onCompletedTask, completed}) =>
         onCompletedTask(list.id, id, e.target.checked)
     }
 
-
     return (
         <div key={id} className="checkbox__items">
             <div className="checkbox">

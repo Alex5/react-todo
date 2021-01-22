@@ -4,7 +4,6 @@ import axios from "axios";
 import addBtn from "../../assets/img/addBtn.svg";
 
 import './Tasks.scss'
-import {AddListButton} from "../index";
 
 const AddTasksForm = ({list, onAddTask}) => {
 
@@ -28,7 +27,7 @@ const AddTasksForm = ({list, onAddTask}) => {
             return;
         }
         setIsSending(true)
-        axios.post('https://ilyin-react-todo-default-rtdb.firebaseio.com/tasks.json', obj).then(({data}) => {
+        axios.post('/tasks', obj).then(({data}) => {
             console.log(data)
             onAddTask(list.id, data)
             toggleFormVisible()
